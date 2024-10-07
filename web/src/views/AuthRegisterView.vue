@@ -43,7 +43,8 @@ const auth = useAuthStore();
 const handleSubmitOk: SubmissionHandler = async (values) => {
   try {
     const result = await register.mutate({
-      data: values
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: values as any
     })
     const data = result.data.registerUser
     auth.$patch({

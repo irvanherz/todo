@@ -57,7 +57,8 @@ const create = useMutation(createWorkspaceMutationDocument)
 const handleSubmitOk: SubmissionHandler = async (values) => {
   try {
     const result = await create.mutate({
-      data: values
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: values as any
     })
     const data = result.data.createWorkspace
     toast({

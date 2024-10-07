@@ -12,7 +12,8 @@ const props = defineProps<TaskListItemToggleCompleteButtonProps>()
 const updater = useMutationTaskUpdate()
 
 const handleChangeCompleteStatus = (e) => {
-  const status = e ? 'COMPLETED' : 'OPEN'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const status: any = e ? 'COMPLETED' : 'OPEN'
   updater.mutate({
     data: {
       id: props.task.id,

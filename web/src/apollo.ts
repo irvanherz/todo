@@ -7,7 +7,7 @@ import { useAuthStore } from './stores/auth';
 
 const cache = new InMemoryCache()
 const httpLink = new HttpLink({
-  uri: `${API_BASE_URL}graphql`,
+  uri: `${API_BASE_URL}/graphql`,
 })
 const authLink = setContext((_, { headers }) => {
   const auth = useAuthStore();

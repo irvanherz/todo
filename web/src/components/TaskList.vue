@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useWorkspaceStore } from '@/stores/workspace';
+import { Task } from '@/types/Task';
 import { computed } from 'vue';
 import TaskListItem from './TaskListItem.vue';
 
@@ -34,7 +35,7 @@ const tasks = computed(() => {
 <template>
   <div class="grid grid-cols-1 gap-2">
     <template v-for="(task) in tasks" :key="task.id">
-      <TaskListItem :task="task" />
+      <TaskListItem :task="task as Task" />
     </template>
   </div>
 </template>

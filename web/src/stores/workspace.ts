@@ -44,11 +44,11 @@ export function useWorkspaceStore(id: number) {
       const workspace = ref(null as typeof result.value['workspace']);
       const taskSummary = computed(() => {
         return {
-          numCommitted: workspace.value?.tasks.filter((t: Task) => t.committedAt && !t.completedAt).length || 0,
-          numStarred: workspace.value?.tasks.filter((t: Task) => t.starred && !t.completedAt).length || 0,
-          numUpcoming: workspace.value?.tasks.filter((t: Task) => t.dueAt && !t.completedAt).length || 0,
-          numTasks: workspace.value?.tasks.filter((t: Task) => !t.completedAt).length || 0,
-          numCompletedTasks: workspace.value?.tasks.filter((t: Task) => t.completedAt).length || 0,
+          numCommitted: workspace.value?.tasks.filter((t) => t.committedAt && !t.completedAt).length || 0,
+          numStarred: workspace.value?.tasks.filter((t) => t.starred && !t.completedAt).length || 0,
+          numUpcoming: workspace.value?.tasks.filter((t) => t.dueAt && !t.completedAt).length || 0,
+          numTasks: workspace.value?.tasks.filter((t) => !t.completedAt).length || 0,
+          numCompletedTasks: workspace.value?.tasks.filter((t) => t.completedAt).length || 0,
         }
       });
   
@@ -62,7 +62,8 @@ export function useWorkspaceStore(id: number) {
         console.log('appendTask', t, workspace.value);
         if (!workspace.value) return;
          
-        workspace.value = {...workspace.value, tasks: [...workspace.value.tasks, t]};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        workspace.value = {...workspace.value, tasks: [...workspace.value.tasks, t] } as any;
       }
       return {
         workspace,
