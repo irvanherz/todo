@@ -21,6 +21,7 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, password: string) {
+    username = username.toLowerCase();
     const user = await this.usersRepository.findOne({ where: { username } });
     if (!user) {
       return null;
@@ -31,6 +32,7 @@ export class AuthService {
   }
 
   async login(input: AuthLoginInput): Promise<AuthResult> {
+    input.usernameOrEmail = input.usernameOrEmail.toLowerCase();
     const user = await this.usersRepository.findOne({
       where: [
         { username: input.usernameOrEmail },
@@ -58,6 +60,8 @@ export class AuthService {
   }
 
   async register(input: AuthRegisterInput): Promise<AuthResult> {
+    input.username = input.username.toLowerCase();
+    input.email = input.email.toLowerCase();
     try {
       console.log('register');
       const user = this.usersRepository.create(input);
