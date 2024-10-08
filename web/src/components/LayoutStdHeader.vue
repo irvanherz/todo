@@ -17,7 +17,7 @@ const menus = [
     <nav class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
       <a href="#" class="flex items-center gap-2 text-lg font-semibold md:text-base">
         <Package2 class="h-6 w-6" />
-        <span class="sr-only">Acme Inc</span>
+        <span class="sr-only">Todo</span>
       </a>
       <template v-for="menu in menus" :key="menu.id">
         <RouterLink :to="menu.url" class="text-foreground transition-colors hover:text-foreground">
@@ -42,7 +42,7 @@ const menus = [
         <nav class="grid gap-6 text-lg font-medium">
           <a href="#" class="flex items-center gap-2 text-lg font-semibold">
             <Package2 class="h-6 w-6" />
-            <span class="sr-only">Acme Inc</span>
+            <span class="sr-only">Todo</span>
           </a>
           <template v-for="menu in menus" :key="menu.id">
             <RouterLink :to="menu.url" class="text-muted-foreground hover:text-foreground">

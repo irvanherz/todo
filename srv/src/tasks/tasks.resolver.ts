@@ -1,6 +1,5 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CurrentGqlUser } from 'src/auth/current-gql-user.decorator';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
 import { CreateTaskInput } from './dto/create-task.input';
 import { UpdateTaskInput } from './dto/update-task.input';
@@ -13,11 +12,7 @@ export class TasksResolver {
 
   @Mutation(() => Task)
   @UseGuards(GqlAuthGuard)
-  async createTask(
-    @Args('data') input: CreateTaskInput,
-    @CurrentGqlUser() user: any,
-  ) {
-    console.log(user);
+  async createTask(@Args('data') input: CreateTaskInput) {
     return await this.tasksService.create(input);
   }
 

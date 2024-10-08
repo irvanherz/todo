@@ -22,8 +22,6 @@ export const TaskFormSchema = z.object({
     .optional(),  // Optional string for task status (could be enum-based depending on your task system)
 
   dueAt: z
-    .string()
-    .optional()
-    .nullable(),  // Optional string for due date
+    .optional(z.date()).nullable(),  // Optional string for due date
 
 })

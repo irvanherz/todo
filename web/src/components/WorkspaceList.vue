@@ -14,7 +14,7 @@ const props = defineProps<WorkspaceListProps>()
 </script>
 
 <template>
-  <div class="columns-3 gap-0">
+  <div class="columns-1 md:columns-2 lg:columns-3 gap-0">
     <template v-for="workspace in props.workspaces" :key="workspace.id">
       <div class="break-inside-avoid p-2">
         <Card class="bg-primary-foreground">

@@ -40,20 +40,23 @@ const updater = useMutationTaskUpdate()
 
 const handleSubmitOk: SubmissionHandler = async (values) => {
   try {
-    const committedAt = values.isCommitted ? new Date().toISOString() : undefined
     const input = {
       ...values,
       id: props.task.id,
-      committedAt,
     }
     const result = await updater.mutate({
       data: input
     })
     const data = result.data.updated
     emit('updated', data)
+    open.value = false
+    toast({
+      title: 'Success',
+      description: "Task updated",
+    });
   } catch (error) {
     toast({
-      title: 'Register Error',
+      title: 'Error',
       description: error.message,
     });
   }
@@ -76,10 +79,6 @@ const handleSubmit = form.handleSubmit(handleSubmitOk, handleSubmitError)
     <SheetContent class="max-w-[400px] w-full h-full flex flex-col">
       <SheetHeader class="">
         <SheetTitle>Update Task</SheetTitle>
-        <!-- <SheetDescription>
-          This action cannot be undone. This will permanently delete your account
-          and remove your data from our servers.
-        </SheetDescription> -->
       </SheetHeader>
       <div class="flex-1 border-t py-4 space-y-4">
         <TaskListItemToggleCommittedButton :task="props.task" />

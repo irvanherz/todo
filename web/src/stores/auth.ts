@@ -4,7 +4,9 @@ import { ref } from "vue";
 interface AuthUser {
     id: number
     email: string
-    fullName: string
+    username: string
+    firstName: string
+    lastName: string
 }
 
 export type AuthStatus = 'authenticated' | 'unauthenticated'

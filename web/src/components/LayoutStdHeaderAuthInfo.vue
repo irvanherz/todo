@@ -24,10 +24,17 @@ const handleLogout = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <div class="text-xs text-muted-foreground">
+            Welcome
+          </div>
+          <div class="font-bold text-base">
+            {{ auth.user.firstName }} {{ auth.user.lastName }}
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem @click="handleLogout">
           Logout

@@ -32,7 +32,7 @@ import { Calendar } from './ui/v-calendar';
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField name="dueAt" v-slot="{ componentField, value }">
+    <FormField name="dueAt" v-slot="{ value, setValue }">
       <FormItem>
         <FormLabel>Task due</FormLabel>
         <FormControl>
@@ -43,11 +43,17 @@ import { Calendar } from './ui/v-calendar';
                 :class="cn('w-full flex justify-start text-left font-normal',!value && 'text-muted-foreground')"
               >
                 <CalendarIcon class="mr-2 h-4 w-4" />
-                <span>{{ componentField.modelValue ? dayjs(componentField.modelValue).format('YYYY-MM-DD HH:mm') : "Pick a date" }}</span>
+                <span>{{ value ? dayjs(value).format('YYYY-MM-DD HH:mm') : "Pick a date" }}</span>
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar v-model="componentField.modelValue" mode="datetime" />
+              <Calendar
+                :model-value="value"
+                @update:model-value="setValue"
+                mode="datetime"
+                is24hr
+                :min-date="new Date()"
+              />
             </PopoverContent>
           </Popover>
         </FormControl>

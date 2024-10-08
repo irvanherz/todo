@@ -12,6 +12,10 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { toast } from './ui/toast';
 import { Calendar } from './ui/v-calendar';
 
+interface TaskAddCardProps {
+  type: 'today' | 'important' | 'planned'
+}
+const props = defineProps<TaskAddCardProps>()
 const route = useRoute()
 const workspaceId = computed(() => +route.params.id)
 
@@ -25,11 +29,16 @@ const create = useMutationTaskCreate()
 
 const handleSubmit: SubmissionHandler = async () => {
   try {
+    const input = {
+      workspaceId: workspaceId.value,
+      ...task,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any
+
+    if (props.type === 'important')  input.starred = true
+    else if (props.type === 'today') input.committedAt = new Date()
     const result = await create.mutate({
-      data: {
-        workspaceId: workspaceId.value,
-        ...task,
-      }
+      data: input
     })
     const data = result.data.created
     emit('created', data)
@@ -53,7 +62,7 @@ const task = reactive({
   starred: false,
   dueAt: null,
 })
-const canSubmit = computed(() => !!task.title)
+const canSubmit = computed(() => !!task.title && (props.type === 'planned' ? !!task.dueAt : true))
 
 </script>
 <template>
@@ -82,7 +91,12 @@ const canSubmit = computed(() => !!task.title)
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-auto p-0">
-            <Calendar v-model="task.dueAt" mode="datetime" />
+            <Calendar
+              v-model="task.dueAt"
+              mode="datetime"
+              is24hr
+              :min-date="new Date()"
+            />
           </PopoverContent>
         </Popover>
         

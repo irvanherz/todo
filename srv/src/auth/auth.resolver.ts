@@ -7,6 +7,7 @@ import { AuthLoginInput } from './dto/auth-login.input';
 import { AuthRegisterInput } from './dto/auth-register.input';
 import { AuthResult } from './dto/auth-result.dto';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
+import { CurrentUserType } from './types/current-user.type';
 
 @Resolver()
 export class AuthResolver {
@@ -14,7 +15,7 @@ export class AuthResolver {
 
   @Query(() => User, { name: 'me' })
   @UseGuards(GqlAuthGuard)
-  async findCurrentUser(@CurrentGqlUser() user: User) {
+  async findCurrentUser(@CurrentGqlUser() user: CurrentUserType) {
     return user;
   }
 

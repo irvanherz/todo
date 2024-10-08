@@ -18,7 +18,7 @@ const afterTaskCreated = (task: any) => {
 </script>
 <template>
   <LayoutWorkspace content-class="flex flex-1 flex-col gap-2 p-4" :workspace-id="workspaceId" :active-menu-id="activeMenuId">
-    <TaskAddCard @created="afterTaskCreated" />
+    <TaskAddCard @created="afterTaskCreated" :type="activeMenuId as any" />
     <TaskList :workspace-id="workspaceId" :type="activeMenuId" />
   </LayoutWorkspace>
 </template>
